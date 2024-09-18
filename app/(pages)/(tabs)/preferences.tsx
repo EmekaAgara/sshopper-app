@@ -174,7 +174,7 @@ const home = () => {
         isLooping
         shouldPlay={index === activeIndex}
         isMuted={false}
-        useNativeControls={true}
+        // useNativeControls={true}
       />
       <View style={styles.textoverlay}>
         {/* Poster (User Profile Image) */}
@@ -264,10 +264,9 @@ const styles = StyleSheet.create({
   video: {
     flex: 1,
     width: "100%",
-    height: "100%",
+    height,
     position: "absolute",
-    paddingHorizontal: 500,
-    // resizeMode: "stretch",
+    padding: 400,
   },
   overlay: {
     position: "absolute",
@@ -279,7 +278,7 @@ const styles = StyleSheet.create({
   textoverlay: {
     position: "absolute",
     left: 20,
-    bottom: 40,
+    bottom: 80,
   },
   actionButton: {
     marginBottom: 20,

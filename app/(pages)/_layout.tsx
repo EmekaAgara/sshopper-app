@@ -14,6 +14,7 @@ export default function PagesLayout() {
     <Stack>
       <Stack.Screen name="logout" options={{ headerShown: false }} />
       <Stack.Screen name="home" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       {/* <Stack.Screen name="sign-up" options={{ headerShown: false }} /> */}
     </Stack>
   );
