@@ -16,7 +16,7 @@ const { height } = Dimensions.get("window");
 const videos = [
   {
     id: "1",
-    uri: "https://www.w3schools.com/html/mov_bbb.mp4",
+    uri: "https://videos.pexels.com/video-files/3888262/3888262-sd_506_960_25fps.mp4",
     likes: 3833,
     comments: 209,
     bookmarks: 209,
@@ -29,7 +29,124 @@ const videos = [
   },
   {
     id: "2",
-    uri: "https://www.w3schools.com/html/movie.mp4",
+    uri: "https://videos.pexels.com/video-files/3888268/3888268-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "3",
+    uri: "https://videos.pexels.com/video-files/4008365/4008365-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "4",
+    uri: "https://videos.pexels.com/video-files/3205789/3205789-sd_360_640_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "5",
+    uri: "https://videos.pexels.com/video-files/3888251/3888251-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "6",
+    uri: "https://videos.pexels.com/video-files/3753710/3753710-sd_360_640_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "7",
+    uri: "https://videos.pexels.com/video-files/4008366/4008366-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "8",
+    uri: "https://videos.pexels.com/video-files/4008367/4008367-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "9",
+    uri: "https://videos.pexels.com/video-files/3886377/3886377-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "10",
+    uri: "https://videos.pexels.com/video-files/5645644/5645644-sd_506_960_25fps.mp4",
+    likes: 2001,
+    comments: 104,
+    bookmarks: 209,
+    shares: 209,
+    poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
+    user: "NBA Geeboy",
+    description:
+      "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
+    price: "N80,000",
+  },
+  {
+    id: "11",
+    uri: "https://videos.pexels.com/video-files/4937469/4937469-sd_506_960_25fps.mp4",
     likes: 2001,
     comments: 104,
     bookmarks: 209,
@@ -52,23 +169,26 @@ const home = () => {
         ref={(ref) => (videoRefs.current[index] = ref!)}
         style={styles.video}
         source={{ uri: item.uri }}
-        // resizeMode="cover"
+        //  resizeMode=""
+        volume={1}
         isLooping
         shouldPlay={index === activeIndex}
         isMuted={false}
       />
       <View style={styles.textoverlay}>
         {/* Poster (User Profile Image) */}
-        <View style={styles.userSection}>
-          <Image source={{ uri: item.poster }} style={styles.poster} />
+        <TouchableOpacity style={styles.userSection}>
+          {/* <Image source={{ uri: item.poster }} style={styles.poster} /> */}
           <Text style={styles.userName}>{item.user}</Text>
-        </View>
+        </TouchableOpacity>
         {/* Video Description */}
         <Text style={styles.description}>{item.description}</Text>
         <Text style={styles.price}>{item.price}</Text>
       </View>
       {/* Overlay with like/comment buttons */}
+
       <View style={styles.overlay}>
+        <Image source={{ uri: item.poster }} style={styles.poster} />
         <TouchableOpacity style={styles.actionButton}>
           <Icon name="heart" size={25} color="white" />
           <Text style={styles.actionText}>{item.likes}</Text>
@@ -84,6 +204,9 @@ const home = () => {
         <TouchableOpacity style={styles.actionButton}>
           <Icon name="share" size={25} color="white" />
           <Text style={styles.actionText}>{item.shares}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionButton}>
+          <Image source={{ uri: item.poster }} style={styles.poster} />
         </TouchableOpacity>
       </View>
     </View>
@@ -125,24 +248,29 @@ const home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: "black",
+    height: "100%",
   },
   videoContainer: {
     height,
     justifyContent: "center",
     alignItems: "center",
+    width: "100%",
   },
   video: {
+    flex: 1,
     width: "100%",
     height: "100%",
     position: "absolute",
+    paddingHorizontal: 500,
+    // resizeMode: "stretch",
   },
   overlay: {
     position: "absolute",
     right: 10,
-    bottom: 100,
+    bottom: 50,
     alignItems: "center",
+    zIndex: 10,
   },
   textoverlay: {
     position: "absolute",
@@ -182,10 +310,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   poster: {
-    width: 30,
-    height: 30,
+    marginBottom: 20,
+    width: 40,
+    height: 40,
     borderRadius: 25,
-    marginRight: 10,
+    // marginRight: 10,
   },
   userName: {
     color: "white",
