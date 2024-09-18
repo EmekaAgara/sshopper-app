@@ -13,6 +13,7 @@ export default function PagesLayout() {
   return (
     <Stack>
       <Stack.Screen name="logout" options={{ headerShown: false }} />
+      <Stack.Screen name="home" options={{ headerShown: false }} />
       {/* <Stack.Screen name="sign-up" options={{ headerShown: false }} /> */}
     </Stack>
   );

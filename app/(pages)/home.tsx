@@ -18,7 +18,7 @@ const index = () => {
       <Text>index</Text>
       <Text>index</Text>
       <Text>index</Text>
-      <Text>index</Text>
+      <Text>home</Text>
       <TouchableOpacity onPress={onLogoutPress}>
         <Text>Log Out</Text>
       </TouchableOpacity>
