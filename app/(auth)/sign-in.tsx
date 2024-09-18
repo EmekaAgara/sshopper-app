@@ -57,9 +57,6 @@ export default function Page() {
         console.error(JSON.stringify(err, null, 2));
       }
     }
-    // {
-    //   console.error(JSON.stringify(err, null, 2));
-    // }
   }, [isLoaded, emailAddress, password]);
 
   return (
@@ -127,7 +124,7 @@ export default function Page() {
         </View>
 
         <TouchableOpacity style={styles.button} onPress={onSignInPress}>
-          <Text style={styles.buttonText}>test</Text>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <View>
           <Link style={styles.subText} href="/sign-up">

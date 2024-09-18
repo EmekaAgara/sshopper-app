@@ -1,6 +1,7 @@
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
+import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import React from "react";
+import { Button, Text, View, TouchableOpacity } from "react-native";
 
 export default function Page() {
   const { user } = useUser();
@@ -9,6 +10,14 @@ export default function Page() {
     <View>
       <SignedIn>
         <Text>Welcome, {user?.emailAddresses[0].emailAddress}</Text>
+
+        <Link href="/logout">
+          <Text>home test</Text>
+        </Link>
+
+        <TouchableOpacity>
+          <Text>Sign Up</Text>
+        </TouchableOpacity>
       </SignedIn>
       <SignedOut>
         <View>

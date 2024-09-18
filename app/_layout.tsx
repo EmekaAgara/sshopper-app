@@ -1,9 +1,9 @@
 import { useFonts } from "expo-font";
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
-import { tokenCache } from "@/cache";
+import { tokenCache } from "../cache";
 import React from "react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -31,11 +31,20 @@ export default function RootLayout() {
       "Missing Publishable Key. Please set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env"
     );
   }
+  if (!tokenCache) {
+    throw new Error("Token cache is not available.");
+  }
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ClerkLoaded>
-        <Slot />
+        {/* <Slot /> */}
+
+        <Stack>
+          <Stack.Screen name="(home)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(pages)" options={{ headerShown: false }} />
+        </Stack>
       </ClerkLoaded>
     </ClerkProvider>
   );
