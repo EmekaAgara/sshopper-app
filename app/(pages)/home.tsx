@@ -174,7 +174,7 @@ const home = () => {
         isLooping
         shouldPlay={index === activeIndex}
         isMuted={false}
-        useNativeControls={true}
+        useNativeControls
       />
       <View style={styles.textoverlay}>
         {/* Poster (User Profile Image) */}

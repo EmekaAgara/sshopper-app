@@ -7,9 +7,11 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Pressable,
 } from "react-native";
 import { Video } from "expo-av";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useRouter } from "expo-router";
 
 const { height } = Dimensions.get("window");
 
@@ -160,11 +162,29 @@ const videos = [
 ];
 
 const home = () => {
+  const [lastTap, setLastTap] = useState<number | null>(null);
+  const router = useRouter();
+
+  const handleDoubleTap = () => {
+    const now = Date.now();
+    const DOUBLE_PRESS_DELAY = 300; // Time interval for double-tap in ms
+
+    if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
+      // Double tap detected, navigate to desired route
+      router.push("kora"); // Update with your desired route
+
+      // router.replace("(pages)/(tabs)/home");
+    } else {
+      // Single tap, store the current tap time
+      setLastTap(now);
+    }
+  };
   const videoRefs = useRef<Video[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const renderItem = ({ item, index }: { item: any; index: number }) => (
-    <View style={styles.videoContainer}>
+    <Pressable onPress={handleDoubleTap} style={styles.videoContainer}>
+      {/* <TouchableOpacity> */}
       <Video
         ref={(ref) => (videoRefs.current[index] = ref!)}
         style={styles.video}
@@ -174,7 +194,7 @@ const home = () => {
         isLooping
         shouldPlay={index === activeIndex}
         isMuted={false}
-        // useNativeControls={true}
+        useNativeControls={true}
       />
       <View style={styles.textoverlay}>
         {/* Poster (User Profile Image) */}
@@ -213,7 +233,8 @@ const home = () => {
           <Image source={{ uri: item.poster }} style={styles.poster} />
         </TouchableOpacity>
       </View>
-    </View>
+      {/* </TouchableOpacity> */}
+    </Pressable>
   );
 
   const onViewableItemsChanged = useRef(({ viewableItems }: any) => {

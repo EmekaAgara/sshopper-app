@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { Video } from "expo-av";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useAuth } from "@clerk/clerk-expo";
+import { useRouter } from "expo-router";
 
 const { height } = Dimensions.get("window");
 
@@ -160,6 +162,13 @@ const videos = [
 ];
 
 const home = () => {
+  const { isLoaded, signOut } = useAuth();
+  const router = useRouter();
+  const onLogoutPress = () => {
+    signOut();
+
+    router.push({ pathname: "/" });
+  };
   const videoRefs = useRef<Video[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -185,6 +194,9 @@ const home = () => {
         {/* Video Description */}
         <Text style={styles.description}>{item.description}</Text>
         <Text style={styles.price}>{item.price}</Text>
+        <TouchableOpacity onPress={onLogoutPress}>
+          <Text>Log Out</Text>
+        </TouchableOpacity>
       </View>
       {/* Overlay with like/comment buttons */}
 
