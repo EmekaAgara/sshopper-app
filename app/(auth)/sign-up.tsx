@@ -73,7 +73,7 @@ export default function Page() {
 
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.replace("/home");
+        router.replace("(pages)/(tabs)/home");
       } else {
         console.error(JSON.stringify(completeSignUp, null, 2));
       }
@@ -184,6 +184,12 @@ export default function Page() {
             <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
               <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
+            <View>
+              <Link style={styles.subText} href="/sign-in">
+                <Text>Don't have an account? </Text>
+                <Text style={styles.link}> Login</Text>
+              </Link>
+            </View>
           </View>
         </>
       )}
