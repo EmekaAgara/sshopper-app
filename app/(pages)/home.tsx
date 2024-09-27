@@ -169,7 +169,6 @@ const home = () => {
         ref={(ref) => (videoRefs.current[index] = ref!)}
         style={styles.video}
         source={{ uri: item.uri }}
-        //  resizeMode=""
         volume={1.0}
         isLooping
         shouldPlay={index === activeIndex}

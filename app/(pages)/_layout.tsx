@@ -18,6 +18,14 @@ export default function PagesLayout() {
         name="kora"
         options={{ headerShown: true, presentation: "modal" }}
       />
+      <Stack.Screen
+        name="success"
+        options={{ headerShown: true, presentation: "modal" }}
+      />
+      <Stack.Screen
+        name="failed"
+        options={{ headerShown: true, presentation: "modal" }}
+      />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       {/* <Stack.Screen name="sign-up" options={{ headerShown: false }} /> */}
     </Stack>

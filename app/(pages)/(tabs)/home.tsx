@@ -8,10 +8,13 @@ import {
   FlatList,
   Image,
   Pressable,
+  Alert,
 } from "react-native";
 import { Video } from "expo-av";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
+import axios from "axios";
+import { useUser } from "@clerk/clerk-expo";
 
 const { height } = Dimensions.get("window");
 
@@ -24,11 +27,15 @@ const videos = [
     bookmarks: 209,
     shares: 209,
     poster: "https://randomuser.me/api/portraits/women/1.jpg",
-    user: "DP❤️",
+    vendor: "DP❤️",
+    vendorEmail: "vendor@email.com",
+    product: "New shirt",
     description:
       "My dear, if ou hear Orchid road run o 😟. you hear Orchid road run o 😟...",
     price: "N80,000",
+    amount: 700,
   },
+
   {
     id: "2",
     uri: "https://videos.pexels.com/video-files/3888268/3888268-sd_506_960_25fps.mp4",
@@ -38,9 +45,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 8900,
   },
   {
     id: "3",
@@ -51,9 +60,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "4",
@@ -64,9 +75,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "5",
@@ -77,9 +90,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "6",
@@ -90,9 +105,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "7",
@@ -103,9 +120,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "8",
@@ -116,9 +135,11 @@ const videos = [
     shares: 209,
     poster: "https://randomuser.me/api/portraits/men/2.jpg", // Image of the poster (profile pic)
     user: "NBA Geeboy",
+    product: "New shirt",
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "9",
@@ -132,6 +153,7 @@ const videos = [
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "10",
@@ -145,6 +167,7 @@ const videos = [
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
   {
     id: "11",
@@ -158,38 +181,90 @@ const videos = [
     description:
       "Catch the latest ou hear Orchid road run o 😟. vibe on black soap 🚀",
     price: "N80,000",
+    amount: 700,
   },
 ];
 
 const home = () => {
   const [lastTap, setLastTap] = useState<number | null>(null);
   const router = useRouter();
+  const { user } = useUser();
+  const SECRET_KEY = process.env.EXPO_PUBLIC_KORA_KEY;
 
   const handleDoubleTap = () => {
     const now = Date.now();
-    const DOUBLE_PRESS_DELAY = 300; // Time interval for double-tap in ms
+    const DOUBLE_PRESS_DELAY = 300;
 
     if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
-      // Double tap detected, navigate to desired route
-      router.push("kora"); // Update with your desired route
-
-      // router.replace("(pages)/(tabs)/home");
+      initiatePayment();
     } else {
-      // Single tap, store the current tap time
       setLastTap(now);
     }
   };
   const videoRefs = useRef<Video[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const initiatePayment = async () => {
+    const currentVideo = videos[activeIndex];
+    const amount = currentVideo.amount;
+    const vendor = currentVideo.vendor;
+    const vendorEmail = currentVideo.vendorEmail;
+    const narration = `Payment For ${currentVideo.product}`;
+    const userEmail = user?.emailAddresses[0].emailAddress;
+    const userName = user?.fullName;
+    const date = new Date();
+
+    const reference = `ref_${Date.now()}`;
+    const paymentData = {
+      amount: amount,
+      currency: "NGN",
+      reference: reference,
+      narration: narration,
+      metadata: {
+        vendorName: vendor,
+        vendorEmail: vendorEmail,
+        amount: amount,
+        date: date,
+      },
+      customer: {
+        name: userName,
+        email: userEmail,
+      },
+      redirect_url: "https://google.com/success",
+      channels: ["card", "bank_transfer", "pay_with_bank", "mobile_money"],
+    };
+
+    try {
+      const response = await axios.post(
+        "https://api.korapay.com/merchant/api/v1/charges/initialize",
+        paymentData,
+        {
+          headers: {
+            Authorization: `Bearer ${SECRET_KEY}`,
+          },
+        }
+      );
+
+      const { checkout_url } = response.data.data;
+
+      router.push({
+        pathname: "/kora",
+        params: { checkoutUrl: checkout_url },
+      });
+    } catch (error) {
+      Alert.alert("Error", "Unable to initialize payment");
+      console.error(error);
+    }
+
+    console.log(paymentData);
+  };
+
   const renderItem = ({ item, index }: { item: any; index: number }) => (
     <Pressable onPress={handleDoubleTap} style={styles.videoContainer}>
-      {/* <TouchableOpacity> */}
       <Video
         ref={(ref) => (videoRefs.current[index] = ref!)}
         style={styles.video}
         source={{ uri: item.uri }}
-        //  resizeMode=""
         volume={1.0}
         isLooping
         shouldPlay={index === activeIndex}
@@ -206,7 +281,6 @@ const home = () => {
         <Text style={styles.description}>{item.description}</Text>
         <Text style={styles.price}>{item.price}</Text>
       </View>
-      {/* Overlay with like/comment buttons */}
 
       <View style={styles.overlay}>
         <TouchableOpacity>
@@ -233,7 +307,6 @@ const home = () => {
           <Image source={{ uri: item.poster }} style={styles.poster} />
         </TouchableOpacity>
       </View>
-      {/* </TouchableOpacity> */}
     </Pressable>
   );
 
