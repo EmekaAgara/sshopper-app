@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // marginTop: "35%",
     zIndex: 1,
-    width: "60%",
-    height: "60%",
+    width: "30%",
+    height: "30%",
     resizeMode: "contain",
   },
 });

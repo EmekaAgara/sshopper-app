@@ -214,7 +214,8 @@ const home = () => {
     const userName = user?.fullName;
     const date = new Date();
 
-    const reference = `ref_${Date.now()}`;
+    // const reference = `ref_${Date.now()}`;
+    const reference = `ref_${Date.now()}_${Math.floor(Math.random() * 100000)}`;
     const paymentData = {
       amount: amount,
       currency: "NGN",
@@ -269,7 +270,7 @@ const home = () => {
         isLooping
         shouldPlay={index === activeIndex}
         isMuted={false}
-        useNativeControls={true}
+        // useNativeControls={true}
       />
       <View style={styles.textoverlay}>
         {/* Poster (User Profile Image) */}

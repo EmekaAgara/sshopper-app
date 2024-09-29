@@ -35,7 +35,7 @@ const Kora = () => {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           javaScriptEnabled={true}
-          domStorageEnabled={true}
+          // domStorageEnabled={true}
           onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
           renderLoading={() => (
             <View

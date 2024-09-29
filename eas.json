@@ -1,0 +1,43 @@
+{
+  "cli": {
+    "version": ">= 12.5.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {    
+       "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY":"pk_test_ZWxlY3RyaWMtYmFzaWxpc2stOTMuY2xlcmsuYWNjb3VudHMuZGV2JA",
+      "EXPO_PUBLIC_KORA_KEY":"sk_test_4vMYZN2TNosZ2MG3vBe2je9iCha8yfDJJxaPVeCL"
+      }
+
+    },
+    "previews": {
+      "android": {
+        "buildType": "apk",
+        "env": {    
+          "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY":"pk_test_ZWxlY3RyaWMtYmFzaWxpc2stOTMuY2xlcmsuYWNjb3VudHMuZGV2JA",
+         "EXPO_PUBLIC_KORA_KEY":"sk_test_4vMYZN2TNosZ2MG3vBe2je9iCha8yfDJJxaPVeCL"
+         }
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "env": {    
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY":"pk_test_ZWxlY3RyaWMtYmFzaWxpc2stOTMuY2xlcmsuYWNjb3VudHMuZGV2JA",
+       "EXPO_PUBLIC_KORA_KEY":"sk_test_4vMYZN2TNosZ2MG3vBe2je9iCha8yfDJJxaPVeCL"
+       }
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {    
+        "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY":"pk_test_ZWxlY3RyaWMtYmFzaWxpc2stOTMuY2xlcmsuYWNjb3VudHMuZGV2JA",
+       "EXPO_PUBLIC_KORA_KEY":"sk_test_4vMYZN2TNosZ2MG3vBe2je9iCha8yfDJJxaPVeCL"
+       }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
